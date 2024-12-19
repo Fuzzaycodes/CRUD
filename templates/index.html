@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>CRUD ME</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        <h1>Todo-list</h1> 
+        {% if tasks | length < 1%}  
+        <h3>No tasks </h3>
+        {% else %}
+
+        <table>
+            <tr>
+                <th>task</th>
+                <th>added</th>
+                <th>actions</th>
+            </tr>
+            {% for task in tasks %}
+
+            <tr>
+                <td>{{task.content}}</td>
+                <td>{{task.date_created }}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <a href="/edit/{{task.id}}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <form action="/" method="post">
+            <input type="text" name="content" id="content"/>
+            <input type="submit" name="add task" id="btn_add"/>
+
+        </form>
+    </div>
+
+</body>
+{% endblock %}
